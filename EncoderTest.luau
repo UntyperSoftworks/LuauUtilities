@@ -9,7 +9,7 @@ function encode(text: string, key: string?): (string, string)
 	if key then
 		currentKey = key
 	else
-		local tlen0 = math.random(6, 16)
+		local tlen0 = math.random(1, 16)
 		for i = 1,tlen0 do
 			currentKey ..= tostring(math.random(0, 9))
 		end
@@ -23,7 +23,6 @@ function encode(text: string, key: string?): (string, string)
 		local byte = string.byte(v)
 		local newByte = (byte * 2) - offset
 		buffer.writeu8(obf, i - 1, newByte)
-		print(newByte)
 		
 		keyIndex += 1
 		if keyIndex > #currentKey then
@@ -64,6 +63,7 @@ function decode(encoded: string, key: string?)
 	return result
 end
 
-local m = encode("local array = nil")
+-- testing
+local m = encode("Hello world!")
 print(m)
 print(decode(m))
